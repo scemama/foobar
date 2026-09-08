@@ -12,7 +12,7 @@ jobs:
     env:
       TREXIO_VERSION: 2.6.1
       TREXIO_DIR: ${{ github.workspace }}/.cache/trexio/2.6.1
-      PKG_CONFIG_PATH: $PKG_CONFIG_PATH:${{ github.workspace }}/.cache/trexio/2.6.1/pkgconfig
+      PKG_CONFIG_PATH: $PKG_CONFIG_PATH:${{ github.workspace }}/.cache/trexio/2.6.1/lib/pkgconfig
 
     steps:
       - name: Checkout
