@@ -1,2 +1,0 @@
-/usr/bin/ar qc libfoo.a CMakeFiles/foo.dir/trexio_module.F90.o CMakeFiles/foo.dir/foo_module.F90.o
-/usr/bin/ranlib libfoo.a

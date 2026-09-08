@@ -1,6 +1,0 @@
-/home/runner/work/foobar/foobar/install_foo/lib/libfoo.a
-/home/runner/work/foobar/foobar/install_foo/include/foo_module.mod
-/home/runner/work/foobar/foobar/install_foo/lib/cmake/foo/fooConfigVersion.cmake
-/home/runner/work/foobar/foobar/install_foo/lib/cmake/foo/fooConfig.cmake
-/home/runner/work/foobar/foobar/install_foo/lib/cmake/foo/fooTargets.cmake
-/home/runner/work/foobar/foobar/install_foo/lib/cmake/foo/fooTargets-noconfig.cmake

@@ -1,3 +1,0 @@
-/home/runner/work/foobar/foobar/build_bar/CMakeFiles/bar.dir
-/home/runner/work/foobar/foobar/build_bar/CMakeFiles/edit_cache.dir
-/home/runner/work/foobar/foobar/build_bar/CMakeFiles/rebuild_cache.dir
