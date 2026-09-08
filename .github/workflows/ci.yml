@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TREXIO_VERSION: 2.6.1
+      TREXIO_DIR: ${{ github.workspace }}/.cache/trexio/2.6.1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf \
+            automake \
+            cmake \
+            gfortran \
+            libhdf5-dev \
+            libtool \
+            make \
+            pkg-config \
+            wget
+
+      - name: Cache trexio
+        id: cache-trexio
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.TREXIO_DIR }}
+          key: ${{ runner.os }}-trexio-${{ env.TREXIO_VERSION }}
+
+      - name: Build trexio
+        if: steps.cache-trexio.outputs.cache-hit != 'true'
+        run: |
+          set -euxo pipefail
+          mkdir -p "$TREXIO_DIR"
+          tmpdir="$(mktemp -d)"
+          cd "$tmpdir"
+          wget "https://github.com/TREX-CoE/trexio/releases/download/v${TREXIO_VERSION}/trexio-${TREXIO_VERSION}.tar.gz"
+          tar -zxf "trexio-${TREXIO_VERSION}.tar.gz"
+          cd "trexio-${TREXIO_VERSION}"
+          ./configure --prefix="$TREXIO_DIR" CFLAGS="-g"
+          (make -j 8 || make)
+          make check
+          make -j 8 install
+
+      - name: Run repository checks
+        run: bash ./run.sh
