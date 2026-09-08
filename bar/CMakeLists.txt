@@ -1,18 +1,15 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.24...4.2)
 project(bar LANGUAGES Fortran)
 
-include(FetchContent)
+# Get dependencies
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(trexio REQUIRED IMPORTED_TARGET trexio)
+find_package(foo REQUIRED)
 
-FetchContent_Declare(
-  foo
-  GIT_REPOSITORY https://github.com/scemama/foobar.git
-  GIT_TAG main
-  SOURCE_SUBDIR foo
+# Define the main project files
+add_library(bar
+    bar_module.F90
+    # This part is contentious. If bar does not also build `trexio_module.F90`, where should it know it was built before?
+    trexio_module.F90
 )
-FetchContent_MakeAvailable(foo)
-
-add_executable(bar bar_module.F90 main_bar.F90)
-set_target_properties(bar PROPERTIES
-  Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/modules
-)
-target_link_libraries(bar PRIVATE foo_module)
+target_link_libraries(foo PRIVATE PkgConfig::trexio foo::foo)

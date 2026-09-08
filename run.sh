@@ -1,38 +1,10 @@
 #!/bin/bash
 set -x
 
-# Foo
-cd foo
-./build_foo.sh
-./build_foo/foo
+# Make sure trexio is installed somewhere where pkg-config can find it
 
-# Expected output:
-# 
-# open OK
-# write mo_num OK
-# write_class OK!
-# read_class OK!
-# Core            Active     
-
-rm foo.hdf5
-
-# Bar
-cd ../bar
-./build_bar.sh
-./build_bar/bar
-
-# Expected output:
-# 
-# FOO
-# open OK
-# write mo_num OK
-# write_class OK!
-# read_class OK!
-# Core            Active          
-# BAR
-# open OK
-# write mo_num OK
-# read_class OK!
-# Core            Active       
-
-rm foo.hdf5
+cmake -B build_foo -S foo -DCMAKE_INSTALL_PREFIX=$(pwd)/install_foo
+cmake --build build_foo
+cmake --install build_foo
+cmake -B build_bar -S bar -Dfoo_ROOT=$(pwd)/install_foo
+cmake --build build_bar
