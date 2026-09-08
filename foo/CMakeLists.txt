@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.24...4.2)
-project(foo LANGUAGES Fortran)
+project(foo VERSION 0.1.0 LANGUAGES Fortran)
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 # Get trexio dependency
 find_package(PkgConfig REQUIRED)
@@ -10,6 +13,7 @@ add_library(foo
     trexio_module.F90
     foo_module.F90
 )
+set_target_properties(foo PROPERTIES Fortran_MODULE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/mod")
 target_link_libraries(foo PRIVATE PkgConfig::trexio)
 target_include_directories(foo PUBLIC "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
@@ -19,9 +23,7 @@ install(TARGETS foo
     EXPORT fooTargets
 )
 install(FILES
-    ${CMAKE_Fortran_MODULE_DIRECTORY}/foo_module.mod
-    # Feel free to comment this one if you think it inteferes
-    ${CMAKE_Fortran_MODULE_DIRECTORY}/trexio_module.mod
+    ${CMAKE_CURRENT_BINARY_DIR}/mod/foo_module.mod
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
