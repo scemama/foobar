@@ -5,6 +5,7 @@ project(bar LANGUAGES Fortran)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(trexio REQUIRED IMPORTED_TARGET trexio)
 find_package(foo REQUIRED)
+find_package(foo2 REQUIRED)
 
 # Define the main project files
 add_library(bar
@@ -12,9 +13,9 @@ add_library(bar
     # This part is contentious. If bar does not also build `trexio_module.F90`, where should it know it was built before?
     trexio_module.F90
 )
-target_link_libraries(bar PRIVATE PkgConfig::trexio foo::foo)
+target_link_libraries(bar PRIVATE PkgConfig::trexio foo::foo foo2::foo2)
 
 add_executable(bar_exe main_bar.F90)
-target_link_libraries(bar_exe PRIVATE bar PkgConfig::trexio foo::foo)
+target_link_libraries(bar_exe PRIVATE bar PkgConfig::trexio foo::foo foo2::foo2)
 
 

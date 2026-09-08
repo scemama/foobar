@@ -6,7 +6,12 @@ set -x
 cmake -B build_foo -S foo -DCMAKE_INSTALL_PREFIX=$(pwd)/install_foo
 cmake --build build_foo
 cmake --install build_foo
-cmake -B build_bar -S bar -Dfoo_ROOT=$(pwd)/install_foo
+
+cmake -B build_foo2 -S foo2 -DCMAKE_INSTALL_PREFIX=$(pwd)/install_foo2
+cmake --build build_foo2
+cmake --install build_foo2
+
+cmake -B build_bar -S bar -Dfoo_ROOT=$(pwd)/install_foo -Dfoo2_ROOT=$(pwd)/install_foo2
 cmake --build build_bar
-rm -f foo.hdf5
+rm -f foo.hdf5 foo2.hdf5
 ./build_bar/bar_exe
