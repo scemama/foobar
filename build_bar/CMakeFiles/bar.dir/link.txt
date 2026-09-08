@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbar.a CMakeFiles/bar.dir/bar_module.F90.o CMakeFiles/bar.dir/trexio_module.F90.o
+/usr/bin/ranlib libbar.a

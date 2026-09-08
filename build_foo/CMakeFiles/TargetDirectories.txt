@@ -1,0 +1,7 @@
+/home/runner/work/foobar/foobar/build_foo/CMakeFiles/foo.dir
+/home/runner/work/foobar/foobar/build_foo/CMakeFiles/edit_cache.dir
+/home/runner/work/foobar/foobar/build_foo/CMakeFiles/rebuild_cache.dir
+/home/runner/work/foobar/foobar/build_foo/CMakeFiles/list_install_components.dir
+/home/runner/work/foobar/foobar/build_foo/CMakeFiles/install.dir
+/home/runner/work/foobar/foobar/build_foo/CMakeFiles/install/local.dir
+/home/runner/work/foobar/foobar/build_foo/CMakeFiles/install/strip.dir

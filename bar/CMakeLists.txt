@@ -12,4 +12,4 @@ add_library(bar
     # This part is contentious. If bar does not also build `trexio_module.F90`, where should it know it was built before?
     trexio_module.F90
 )
-target_link_libraries(foo PRIVATE PkgConfig::trexio foo::foo)
+target_link_libraries(bar PRIVATE PkgConfig::trexio foo::foo)
