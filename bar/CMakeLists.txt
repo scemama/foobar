@@ -13,3 +13,8 @@ add_library(bar
     trexio_module.F90
 )
 target_link_libraries(bar PRIVATE PkgConfig::trexio foo::foo)
+
+add_executable(bar_exe main_bar.F90)
+target_link_libraries(bar_exe PRIVATE bar PkgConfig::trexio foo::foo)
+
+
