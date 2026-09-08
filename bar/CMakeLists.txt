@@ -10,12 +10,19 @@ find_package(foo2 REQUIRED)
 # Define the main project files
 add_library(bar
     bar_module.F90
-    # This part is contentious. If bar does not also build `trexio_module.F90`, where should it know it was built before?
-    trexio_module.F90
 )
 target_link_libraries(bar PRIVATE PkgConfig::trexio foo::foo foo2::foo2)
 
 add_executable(bar_exe main_bar.F90)
-target_link_libraries(bar_exe PRIVATE bar PkgConfig::trexio foo::foo foo2::foo2)
+target_link_libraries(bar_exe PRIVATE bar)
+
+add_library(bar_trexio
+    bar_module.F90
+    trexio_module.F90
+)
+target_link_libraries(bar_trexio PRIVATE PkgConfig::trexio foo::foo foo2::foo2)
+
+add_executable(bar_trexio_exe main_trexio_bar.F90)
+target_link_libraries(bar_trexio_exe PRIVATE bar_trexio)
 
 
